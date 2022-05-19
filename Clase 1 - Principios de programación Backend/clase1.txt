@@ -1,0 +1,21 @@
+## Principios de programación Backend.
+
+Todas las clases: https://drive.google.com/drive/u/0/folders/1wClXtk2qmlQPOSyQCO3w-Vf8QxpZoSoX
+
+Backend:
+
+    -Aplicaciones que viven en el servidor 
+    -A menudo se le denomina “el lado del servidor”.
+    -Consiste en un servidor, una aplicación y una base de datos.
+    -Se toman los datos, se procesa la información y se envía al usuario
+
+MERN Stack
+
+    -MongoDB base de datos no relacional
+    -ExpressJS framework para crear servidores en NodeJS
+    -ReactJS librería para desarrollar interfaces de usuario
+    -NodeJS entorno de ejecución de Javascript
+
+- - - Javascript es un lenguaje interpretado - - -
+
+

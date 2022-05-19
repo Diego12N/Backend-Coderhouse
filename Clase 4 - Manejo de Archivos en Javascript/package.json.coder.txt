@@ -1,0 +1,15 @@
+{
+  "contenidoStr": "{\n  \"name\": \"desafios\",\n  \"version\": \"1.0.0\",\n  \"description\": \"programa para manejar archivos\",\n  \"main\": \"desafioGenerico2.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"author\": \"\\\"coderhouse\\\"\",\n  \"license\": \"ISC\"\n}\n",
+  "contenidoObj": {
+    "name": "desafios",
+    "version": "1.0.0",
+    "description": "programa para manejar archivos",
+    "main": "desafioGenerico2.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Coderhouserse",
+    "license": "ISC"
+  },
+  "size": 259
+}
