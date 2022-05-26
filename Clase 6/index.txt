@@ -1,0 +1,5 @@
+Cliente ---- Peticion HTTP ----> Servidor
+Cliente <---- Respuesta HTTP ---- Servidor
+
+
+Protocolo, es una serie de reglas predefinidas.

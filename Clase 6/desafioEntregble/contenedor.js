@@ -1,5 +1,4 @@
 const fs = require("fs/promises");
-const ruta = "./products.txt";
 
 class Contenedor {
 	constructor(file) {
@@ -10,7 +9,10 @@ class Contenedor {
 		return fs
 			.readFile(this.file, "utf-8")
 			.then((res) => (res ? JSON.parse(res) : undefined))
-			.catch(() => undefined);
+			.catch((err) => {
+				undefined;
+				console.log("Catch", err);
+			});
 	}
 
 	async writeFile(product) {
@@ -95,42 +97,4 @@ class Contenedor {
 	}
 }
 
-const product1 = {
-	title: "Escuadra",
-	price: 123.45,
-	thumbnail:
-		"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-	id: 1,
-};
-
-const product2 = {
-	title: "Calculadora",
-	price: 234.56,
-	thumbnail:
-		"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png",
-	id: 2,
-};
-
-const product3 = {
-	title: "Globo Terráqueo",
-	price: 345.67,
-	thumbnail:
-		"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
-	id: 3,
-};
-
-const main = async () => {
-	const productsFile = new Contenedor(ruta);
-
-	/* 	await productsFile.save(product1);
-	await productsFile.save(product2); */
-
-	//productsFile.deleteAll();
-
-	//let product = await productsFile.getById(2);
-	//let productDelete = await productsFile.deleteById(2);
-	// console.log(product);
-	//console.log("delete", productDelete);
-};
-
-main();
+module.exports.contenedor = Contenedor;
