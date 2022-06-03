@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
-let mascotas = [];
+const mascotas = [];
 
-router.get("/", (req, res) => {
+router.get("/mascotas", (req, res) => {
 	res.json(mascotas);
 });
 
-router.post("/", (req, res) => {
+router.post("/mascotas", (req, res) => {
 	const {nombre, raza, edad} = req.body;
 	mascotas.push({nombre, raza, edad});
 	res.json(mascotas);

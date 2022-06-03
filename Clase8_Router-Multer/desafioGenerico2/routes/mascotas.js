@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-let mascotas = [];
+const mascotas = [];
 
 router.get("/", (req, res) => {
 	res.json(mascotas);
