@@ -30,7 +30,7 @@ class Contenedor {
 			const newProduct = JSON.stringify([productToAdd]);
 
 			await this.writeFile(newProduct);
-			return console.log(`Se asigno el id Nro ${newId}`);
+			return productToAdd;
 		}
 
 		const productExist = productList.some((prod) => prod.id === productObj.id);
@@ -49,8 +49,6 @@ class Contenedor {
 				return product;
 			});
 
-			console.log("Lista actualizada", listUpdated);
-
 			await this.writeFile(JSON.stringify(listUpdated));
 
 			return productObj;
@@ -63,7 +61,7 @@ class Contenedor {
 
 		await this.writeFile(JSON.stringify(productList));
 
-		return console.log(`Se asigno el id Nro ${newId}`);
+		return productToAdd;
 	}
 
 	getAll() {

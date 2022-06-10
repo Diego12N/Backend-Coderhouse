@@ -11,7 +11,7 @@ routes.get("/", (req, res) => {
 routes.get("/products", async (req, res) => {
 	const data = await contenedor.getAll();
 	if (!data) {
-		return res.send("No existe ningun archivo en la ruta indicada");
+		return res.send([]);
 	}
 	res.send(data);
 });
