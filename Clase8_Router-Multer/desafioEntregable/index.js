@@ -11,6 +11,13 @@ app.get("/", (req, res) => {
 	res.send("Prueba");
 });
 
+/* app.post("/", (req, res) => {
+	const {title, price, thumbnail} = req.body;
+	const object = {title, price, thumbnail};
+
+	res.send(object);
+}); */
+
 app.listen(PORT, () => {
 	console.log("Servidor Funcionado");
 });

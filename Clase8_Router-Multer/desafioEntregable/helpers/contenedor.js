@@ -1,4 +1,5 @@
 const fs = require("fs/promises");
+const {stringify} = require("querystring");
 
 class Contenedor {
 	constructor(file) {
@@ -32,13 +33,27 @@ class Contenedor {
 			return console.log(`Se asigno el id Nro ${newId}`);
 		}
 
-		const productExist = productList.some(
-			(prod) => prod.title === productObj.title
-		);
+		const productExist = productList.some((prod) => prod.id === productObj.id);
 
 		if (productExist) {
-			console.log("Ya existe un producto con el mismo nombre");
-			return;
+			let listUpdated = productList.map((product) => {
+				if (product.id === productObj.id) {
+					return {
+						title: productObj.title,
+						price: productObj.price,
+						thumbnail: productObj.thumbnail,
+						id: product.id,
+					};
+				}
+
+				return product;
+			});
+
+			console.log("Lista actualizada", listUpdated);
+
+			await this.writeFile(JSON.stringify(listUpdated));
+
+			return productObj;
 		}
 
 		let newId = productList[productList.length - 1].id + 1;
@@ -66,7 +81,7 @@ class Contenedor {
 			if (productSelected) {
 				return productSelected;
 			} else {
-				return `No existe un producto con el ID Nro. ${Number}.`;
+				return {error: "producto no encontrado"};
 			}
 		} catch (error) {
 			return "No se pudo acceder al archivo";
