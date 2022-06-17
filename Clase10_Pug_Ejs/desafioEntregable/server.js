@@ -21,6 +21,16 @@ app.get("/products", async (req, res) => {
 
 app.post("/", async (req, res) => {
 	const newProduct = req.body;
+	if (
+		newProduct.title == "" ||
+		newProduct.price == "" ||
+		newProduct.thumbnail == ""
+	) {
+		//res.status(400).send("Existe al menos un campo vacio");
+		res.redirect("/");
+		return;
+	}
+	console.log(newProduct);
 	await contenedor.save(newProduct);
 	res.redirect("/products");
 });

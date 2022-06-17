@@ -17,12 +17,21 @@ app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/index.html");
 });
 
+let mensajes = [];
+
 //Socket inicializado:
-io.on("connection", (socket) => {
-	socket.on("caracter", (argumento) => {
-		console.log(argumento);
+io.on("connection", (channel) => {
+	channel.on("caracter", (argumento) => {
+		io.sockets.emit("respuestas", argumento);
 	});
-	console.log("Usuario Conectado");
+
+	channel.on("frases", (frase) => {
+		mensajes.push({/* socketId: channel.id, */ mensaje: frase});
+		io.sockets.emit("mensajeria", mensajes);
+		console.log(mensajes);
+	});
+
+	io.sockets.emit("mensajeria", mensajes);
 });
 
 httpServer.listen(PORT, () => {
