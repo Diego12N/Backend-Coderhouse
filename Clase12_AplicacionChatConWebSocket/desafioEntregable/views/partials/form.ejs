@@ -4,10 +4,16 @@
 	class="d-flex flex-column align-items-center w-50 text-light gap-2"
 >
 	<label>Titulo</label>
-	<input type="text" name="title" class="w-100 p-2" />
+	<input id="title" type="text" name="title" class="w-100 p-2" required />
 	<label>Precio</label>
-	<input type="number" name="price" class="w-100 p-2" />
+	<input id="price" type="number" name="price" class="w-100 p-2" required />
 	<label>Imagen(URL)</label>
-	<input type="url" name="thumbnail" class="w-100 mb-3 p-2" />
+	<input
+		id="thumbnail"
+		type="url"
+		name="thumbnail"
+		class="w-100 mb-3 p-2"
+		required
+	/>
 	<input type="submit" value="Enviar" class="w-25" />
 </form>

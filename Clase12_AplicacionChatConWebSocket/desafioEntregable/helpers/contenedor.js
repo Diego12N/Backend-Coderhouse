@@ -33,7 +33,7 @@ class Contenedor {
 			return productToAdd;
 		}
 
-		const productExist = productList.some((prod) => prod.id === productObj.id);
+		/* const productExist = productList.some((prod) => prod.id === productObj.id);
 
 		if (productExist) {
 			let listUpdated = productList.map((product) => {
@@ -52,7 +52,7 @@ class Contenedor {
 			await this.writeFile(JSON.stringify(listUpdated));
 
 			return productObj;
-		}
+		} */
 
 		let newId = productList[productList.length - 1].id + 1;
 		const productToAdd = Object.assign(productObj, {id: newId});
