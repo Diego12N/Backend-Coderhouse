@@ -9,10 +9,15 @@ const {
 
 routes.get("/:id?", async (req, res) => {
 	const id = parseInt(req.params.id);
-	getProducts(id, res);
+	const products = await getProducts(id);
+	res.send(products);
 });
 
-routes.post("/", saveProducts);
+routes.post("/", (req, res) => {
+	let newProduct = saveProducts(req);
+
+	res.send(newProduct);
+});
 
 routes.put("/:id", async (req, res) => {
 	const id = parseInt(req.params.id);

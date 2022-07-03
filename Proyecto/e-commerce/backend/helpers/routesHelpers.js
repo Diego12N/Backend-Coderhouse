@@ -1,18 +1,33 @@
-const moduleContenedor = require("./contenedor");
+const moduleContenedor = require("../helpers/contenedor");
 const contenedor = new moduleContenedor.contenedor("./data/products.txt");
+const {version: uuidVersion} = require("uuid");
+const {validate: uuidValidate} = require("uuid");
 
-async function getProducts(id, res) {
-	if (isNaN(id)) {
+function uuidValidateV4(uuid) {
+	return uuidValidate(uuid) && uuidVersion(uuid) === 4;
+}
+
+async function getProducts(id) {
+	if (!uuidValidateV4(id)) {
 		const data = await contenedor.getAll();
-		return res.send(data);
+		return data;
 	} else {
 		const data = await contenedor.getById(id);
-		return res.send(data);
+		return data;
 	}
 }
 
-async function saveProducts(req, res) {
-	const {nombre, descripcion, código, foto, precio, stock} = req.body;
+async function getCartProducts(id) {
+	if (!uuidValidateV4(id)) {
+		return {};
+	} else {
+		const data = await contenedor.getById(id);
+		return data;
+	}
+}
+
+async function saveProducts(req) {
+	const {nombre, descripcion, codigo, foto, precio, stock} = req;
 
 	const date = new Date();
 	const timestamp = date.toLocaleString();
@@ -20,7 +35,7 @@ async function saveProducts(req, res) {
 	const newProduct = {
 		nombre,
 		descripcion,
-		código,
+		codigo,
 		foto,
 		precio,
 		stock,
@@ -29,16 +44,16 @@ async function saveProducts(req, res) {
 
 	const data = await contenedor.save(newProduct);
 
-	return res.send(data);
+	return data;
 }
 
 async function modifyProduct(req, res, id) {
-	const {nombre, descripcion, código, foto, precio, stock, timestamp} = req;
+	const {nombre, descripcion, codigo, foto, precio, stock, timestamp} = req;
 
 	const newProduct = {
 		nombre,
 		descripcion,
-		código,
+		codigo,
 		foto,
 		precio,
 		stock,
@@ -53,6 +68,7 @@ async function modifyProduct(req, res, id) {
 
 module.exports = {
 	getProducts,
+	getCartProducts,
 	saveProducts,
 	modifyProduct,
 };

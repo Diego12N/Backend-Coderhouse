@@ -1,5 +1,5 @@
 const fs = require("fs/promises");
-const {stringify} = require("querystring");
+const {v4: uuidv4} = require("uuid");
 
 class Contenedor {
 	constructor(file) {
@@ -25,7 +25,7 @@ class Contenedor {
 	async save(productObj) {
 		const productList = await this.readFile();
 		if (!productList) {
-			let newId = 1;
+			let newId = uuidv4();
 			const productToAdd = Object.assign(productObj, {id: newId});
 			const newProduct = JSON.stringify([productToAdd]);
 
@@ -52,7 +52,7 @@ class Contenedor {
 			return productObj;
 		}
 
-		let newId = productList[productList.length - 1].id + 1;
+		let newId = uuidv4();
 		const productToAdd = Object.assign(productObj, {id: newId});
 
 		productList.push(productToAdd);
@@ -71,7 +71,7 @@ class Contenedor {
 			const productList = await this.readFile();
 
 			const productSelected = productList.find((product) => {
-				return product.id === Number;
+				return product.id == Number;
 			});
 
 			if (productSelected) {
