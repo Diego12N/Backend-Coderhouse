@@ -1,0 +1,44 @@
+Para trabajar con la base de datos desde la terminal: 
+
+- Ingresar a la ruta C:\wampp
+- Ejecutar el comando: 
+    mysql -u root
+
+- usar una base de datos: 
+    use nombreDeLaDB;
+
+- Seleccionar una tabla: 
+    SELECT * FROM tablename; 
+    (* es igual a todos/all)
+
+- Seleccionar tabla y relacionarla con otra mediante JOIN, doy apodo a las tablas para no reescribir, ej tabla1.usuarios u.
+
+    SELECT * FROM tabla.usuarios u LEFT JOIN tabla2.deportes d
+
+- Asignar la relacion del punto anterior: 
+
+    ON u.id = d.capitan;
+
+    EJ: 
+
+    SELECT u.nombre, u.apellido, u.edad, d.nombre 
+    FROM clase15.usuarios u 
+    RIGHT JOIN clase15.deportes d
+    ON u.id = d.capitandeportes;
+
+- Insertar datos: 
+    insert into nombreDeLaDB.nombreDeLaTabla (key1, keys2) value (valueKey1, valueKey2) 
+    insert into nombreDeLaDB.nombreDeLaTabla (key1, keys2) values (valueKey1, valueKey2), (valueKey1, valueKey2) 
+
+- Borrar datos grabados en la tabla:
+
+    DELETE FROM tabla.usuarios WHERE key="Value";
+
+- Crear tabla y setear sus respectivas claves y relacionar su primary key con otra tabla: 
+    create table nombreDeLaDB.nombreDeLaTabla (
+        id int not null auto_increment,
+        nombre varchar(50) not null,
+        capitan int not null,
+        primary key(id),
+        foreing key(capitan) references nombreDeOtraTabla(id) 
+    );
