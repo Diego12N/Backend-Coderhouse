@@ -1,0 +1,27 @@
+use ecommerce
+
+db.productos.insertMany([{"nombre": "Samsung Galaxy A13", "descripcion": "128GB de Memoria + 4GB Ram. Negro.", "codigo": 2528, "precio": 2700, "foto": "a13.jpg", "stock": 25}, {"nombre": "Samsung J6", "descripcion": "Modelo Blanco, 25gb Memoria.", "codigo": 2526, "precio": 950, "foto": "j6.jpg", "stock": 8}, {"nombre": "Samsung S21", "descripcion": "128 gb de Memoria + 6gb de Ram. Negro", "codigo": 2530, "precio": 4350, "foto": "s21.jpg", "stock": 20}, {"nombre": "Motorola Edge 20 Lite", "descripcion": "128gb de Memoria + 6gb de Ram. Blanco.", "codigo": 2428, "precio": 3150, "foto": "e20lite.jpg", "stock": 15}, {"nombre": "Motorola Edge 20 Pro", "descripcion": "256gb de Memoria + 12gb de Ram. Negro mate.", "codigo": 2450, "precio": 4980, "foto": "e20Pro.jpg", "stock": 10}, {"nombre": "Moto g200", "descripcion": "5G. 128 gb de Memoria + 4gb Ram. Azul.", "codigo": 2420, "precio": 2500, "foto": "g200.jpg", "stock": 10}, {"nombre": "Xiami Readme Note 10 Pro", "descripcion": "Daul SIM, 128 gb de Memoria + 6gb de Ram. Azul Glaciar.", "codigo": 3030 , "precio": 4700, "foto": "note10P.jpg", "stock": 12}, {"nombre": "Xiami Readme 9A", "descripcion": "Dual SIM, 32gb de Memoria + 2gb Ram. Blanco.", "codigo": 3032 , "precio": 1700, "foto": "9A.jpg", "stock": 10}, {"nombre": "Xiami Readme Note 10", "descripcion": "5G, Dual SIM, 128gb d Memoria + 4 gb de Ram. Verde.", "codigo": 3040 , "precio": 2850, "foto": "note10.jpg", "stock": 15}, {"nombre": "Xiami Readme 10", "descripcion": "Dual SIM, 64gb de Memoria + 4gb Ram. Carbon grey.", "codigo": 3028 , "precio": 2800, "foto": "readme10.jpg", "stock": 18}])
+
+db.productos.find() 
+
+db.productos.count()
+
+db.productos.insertOne({"nombre": "Xiami Readme Note 11s", "descripcion": "5G, Dual SIM, 128gb d Memoria + 6gb de Ram. Azul ocaso.", "codigo": 3060 , "precio": 4350, "foto": "note11s.jpg", "stock": 10})
+
+db.productos.find({"precio": {$lt:1000}}).pretty()
+
+db.productos.find({$and: [{"precio": {$lt:3000}}, {"precio": {$gt:1000}}]}).pretty()
+
+db.productos.find({"precio": {$gt:3000}}).pretty()
+
+db.productos.find({},{"nombre": 1, "precio":1, "_id":0}).pretty().sort({"precio": 1}).limit(1).skip(2)
+
+db.productos.updateMany({},{$set: {"stock": 100}})  
+
+db.productos.updateMany({"precio": {$gt: 4000}},{$set: {"stock": 0}})
+
+db.productos.deleteMany({"precio": {$lt: 1000}})
+
+use admin
+
+db.createUser({"user": "pepe", "pwd": "asd456", "roles": [{role: "read", db: "ecommerce"}]})

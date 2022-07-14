@@ -1,0 +1,7 @@
+MongoDB   -    SQL
+
+Servidor  =  Servidor
+Base de datos  =  Base de datos
+Coleccion  =  Tabla  
+Documento  =  Fila
+Campo  =  Columna 

@@ -1,0 +1,189 @@
+SQL: Son base de datos relacionales. Es decir que las tablas estan conectadas entre si.
+
+NoSQL: base de datos no relacionales, no se guarda relacion entre datos. Se puede guardar una relacion pero no es necesariohacer una division tablas como una base SQL.
+
+Como implementar MongoDB:
+
+    -Local: Mongo Servert.
+    -Remota:  Mediante una plataforma configurada en la nuve
+
+
+Almacena datos endocumentos flexibles, similar a JSON.
+
+MongoDB: es una base de datos orientada a documentos. Se basa en el concepto de Coleccion, Documento y Propiedad.
+
+-Un Documento es un objeto javascript (Los documentos no necesariamente deben guardar una relacion, pero lo ideal es que compartan la misma informacion basada en calve valor).
+
+COMO TRABAJAR DESDE LA TERMINAL:
+
+Iniciar mongo en la consola:
+
+    Escribir "mongo"
+
+Ver las bases de datos disponibles: 
+
+    "show databases"
+
+Ver los comandos:
+
+    "help"  y "db.help()" (El segundo me permite ver varios metodos de MongoDB)
+
+Ver en que base de datos estoy:
+
+    "db" por default es test.
+
+Usar o crear una base de datos:
+
+    "use firstdatabase" Si la misma no existe la crea.
+
+
+Ver las colecciones: 
+
+    "show collections"
+
+--------------------  C R U D  --------------------
+
+----------CREAR (CREATE)----------
+
+Crear una coleccion (2 Formas): 
+
+    "db.crateCollection("nombreDeLaColeccion")"
+    db.nombreDeLaColeccion.insert({})    // Si la collecion no existe la crea.
+
+
+Insertar un documento dentro de una coleccion:
+
+    db.nombreDeLaColeccion.insert({"clave": "valor", "clave": "valor"})
+
+Insertar un documento (Many) RECOMENDADO:
+
+    db.nombreDeLaColeccion.insertMany([{"clave": valor}, {"clave": valor}, {"clave": valor}])
+
+Insertar un documento:
+
+    db.nombreDeLaColeccion.insertOne({"clave": valor})
+
+Insertar varios documentos: 
+
+    db.nombreDeLaColeccion.insert([{"clave": "valor", "clave": "valor"}, {"clave": "valor", "clave": "valor"}])
+
+------------------------------
+
+----------LEER (READ)----------
+
+Mostrar la informacion dentro de una coleccion:
+
+    "db.nombreDeLaColeccion.find()"
+    "db.nombreDeLaColeccion.find().pretty()"   // Muestra la informacionde manera mas legible
+
+
+-Mongo genera ID de manera automatica por cada documento. El mismo nunca se repite
+
+
+Mostrar segmentando dentro de una coleccion usando una condicion:
+
+    Ej: "db.nombreDeLaColeccion.find({"edad": 14, "nombre": "Carlos"}).pretty()"
+
+Mostrar solo la informacion especificada dentro de un segmento: (1 SIGNIFICA TRAER LA INFORMACION Y 0 SIGNIFIVCA NO TRAERLA)
+
+    Ej: "db.nombreDeLaColeccion.find({"edad": 14, "nombre": "Carlos"}).("edad":1, "id": 0).pretty()"
+
+
+Mostrar un objeto dentro de otro:
+
+    db.nombreDeLaColeccion.find({"tallas.zapato": 42}).pretty()
+
+
+Ordenar documentos: 
+
+    E"db.nombreDeLaColeccion.find().sort({"nombre":1})pretty()"  // 1 Le indico que ordene por la clave nombre
+
+
+Limitar los elementos a mostrar:
+
+    "db.nombreDeLaColeccion.find({"edad": 14, "nombre": "Carlos"}).pretty().limit(2)" // MUestra 2 elementos
+
+Buscar un unico documento (Muestra el primer documento que cumpla el requisito en caso de incluir uno):
+
+    "db.nombreDeLaColeccion.findOne({"edad": 14})"
+
+
+Equivalente a console.log() es print:
+
+    db.nombreDeLaColeccion.find().forEach(elem => { print(`Texto de ejemplo ${elem}`) })
+
+------------------------------
+
+----------ACTUALIZAR (UPDATE)------
+
+MOdificar el nombre de la coleccion: 
+
+    db.nombreDeLaColeccion.renameCollection("nuevoNombre")
+
+Modificar informacion (Reemplaza todos los datos anteriores por los datos indicados en la segunda llave):
+
+    db.nombreDeLaColeccion.update({"nombre": "Carlos"}, {"edad": 28})  
+    
+    // La primera llave selecciona al objeto que cumpla la condicion y la segunda llave es donde se ingresa la informaciona modificar.
+
+Modificar/Agregar informacion sin reemplazar los datos (Agregando:  {$set{}}):
+
+    db.nombreDeLaColeccion.update({"nombre": "Carlos"}, {$set:{"edad": 28}})  
+
+Modificar mas de un elemento:
+
+    db.nombreDeLaColeccion.updateMany({},{$set: {"stock": 100}})   // {} Hace referencia a todos los documentos
+
+Eliminar una clave: 
+
+    db.nombreDeLaColeccion.update({"claveCondicion":"valorCondicion"}, {$unset: {"claveEliminada": "ValorEliminado"}})
+
+Modificar segun operaciones: 
+
+    db.nombreDeLaColeccion.update({$inc:{"edad": 2}}) // Le suma 2 al valor Anterior (edad: 25 => edad: 27) 
+    db.nombreDeLaColeccion.update({$mul:{"edad": 2}}) // Le multiplica 2 al valor Anterior 
+    db.nombreDeLaColeccion.update({$min:{"edad": 25}}) // Solo Realiza la modificacion si el valor ingresado es menor al valor actual.
+    db.nombreDeLaColeccion.update({$max:{"edad": 25}}) // Solo Realiza la modificacion si el valor ingresado es mayo al valor actual.
+
+
+Modificar un valor increntandolo
+
+    db.nombreDeLaColeccion.update({"nombre": "Carlos"}, {$rename:{"nombre":"name"}})
+
+
+
+
+------------------------------
+
+----------BORRAR (DELETE)----------
+
+Eliminar un documento: 
+
+    db.nombreDeLaColeccion.deleteOne({"clave": "valor"})
+
+    db.nombreDeLaColeccion.deleteMany({"Clave": "valor"}) //Borrar todos los que coincidan
+
+    db.nombreDeLaColeccion.deleteMany({}) // Borrar todos
+
+    db.nombreDeLaColeccion.remove({})  // Elimina todos los documentos
+
+    db.nombreDeLaColeccion.remove({"nobmre": "Carlos"}) // Elimina el documento que tenga por nombre a Carlos
+
+
+Borrar base de datos:
+
+    "db.dropDatabase()" Elimina la base de datos sobre la que me encuentro
+
+
+Borrar una collecion: 
+
+    "db.nombreDeLaColeccion.drop()"
+    
+    
+
+
+
+
+
+
+

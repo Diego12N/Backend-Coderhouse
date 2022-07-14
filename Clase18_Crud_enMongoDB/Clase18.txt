@@ -1,0 +1,73 @@
+Los Id creados por MongoDB se compone de 3 secciones:
+
+    ObjectId(62cdf7123140fa2ef3ee3bf0)
+        - UNIX TIMESTAMP
+        -RANDOM VALUE
+        -COUNT
+
+OBTENER LA FECHA DE CREACION:
+
+    Link: https://steveridout.com/mongo-object-time/
+
+    Funcion:
+
+        var dateFromObjectId = function (objectId) {
+    	    return new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+        };
+
+    Consola: ObjectId("62cdf7123140fa2ef3ee3bf0").getTimestamp()
+
+
+
+MONGODB Contadores
+
+    db.nombreDeLaColeccion.estimatedDocumentCount() // Cantidad de documentos
+    
+    db.nombreDeLaColeccion.countDocuments({clave: valor}) // Cantidad de documentos que cumplen el requisito
+
+
+FILTROS: 
+
+Devuelve los documentos según el operador de filtro utilizado
+
+    $and : Realiza operación AND -> sintaxis: {$and: [ {},{} ] }
+    $or : Realiza operación OR -> sintaxis: {$or: [ {},{} ] }
+    $lt : Coincide con valores que son menores que un valor especificado.
+    $lte : Coincide con valores menores o iguales a un valor especificado.
+    $gt : Coincide con valores mayores a un valor especificado.
+    $gte : Coincide con valores mayores o iguales a un valor especificado.
+    $ne : Coincide con valores que no son iguales a un valor especificado.
+    $eq : Selecciona los documentos que son iguales a un valor especificado.
+    $exists : Selecciona los documentos según la existencia de un campo.
+    $in : Selecciona los documentos especificados en un array. 
+    sintaxis: {key:{$in: [array of values] } }
+    $nin : Coincide con ninguno de los valores especificados en un array.
+    $size : Coincide con el número de elementos especificados.
+    $all : Coincide con todos los valores definidos dentro de un array.
+    $elemMatch : Coincide con algún valor definido dentro del query.
+
+    sort( { campoA: 1 ó -1 , campoB: 1 ó -1 , ... } ) : Especifica el orden en el que la consulta devuelve documentos coincidentes.
+    limit(num): Especifica el número máximo de documentos devueltos. 
+    skip(offset) : Saltea la cantidad de documentos especificada.
+
+    Ej: db.Employee.find().skip(2).limit(3).sort({Employeeid:-1})
+
+    Ej: db.usuarios.find({$or:[{"tallas": 36}, {"nombre": "Carlos"}]}).pretty() // Misma sintaxis para $and
+    Ej: db.usuarios.find({"tallas.zapatos": {$gt:42}}).pretty()
+
+
+USUARIOS Y PERMISOS
+
+    -Siempre debo estar sobre la db Admin: use admin
+    -Para ver todos los roles por defecto de MongoDB: "show roles"
+
+    
+Crear usuarios:
+
+    db.createUser({"user": "nombreUsuario", "pwd": "contraseña", "roles": [{role: "read", db: "ecommerce"}]}) // Tiene de rol leer la base de datos ecommerce
+    db.createUser({"user": "nombreUsuario", "pwd": "contraseña", "roles": [{role: "readWrite", db: "ecommerce"}]})
+
+
+Como ingresar con:
+
+    mongo -u nombreUsuario -p Contraseña

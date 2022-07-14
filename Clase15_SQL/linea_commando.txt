@@ -1,3 +1,15 @@
+Que necesito para trabajar con una base de datos: 
+
+Cliente (Sistema de gestion de base de datos): 
+    -Linea de comandos: CLI
+    -Interfas grafica: GUI (Mysql o MariaDb)
+    -Cliente web
+    -Cliente aplicacion: cliente implementado dentro de la aplicacion backend.
+
+SQL: se basa en el concepto Tabla, Fila y Registro.
+
+
+
 Para trabajar con la base de datos desde la terminal: 
 
 - Ingresar a la ruta C:\wampp
@@ -42,3 +54,5 @@ Para trabajar con la base de datos desde la terminal:
         primary key(id),
         foreing key(capitan) references nombreDeOtraTabla(id) 
     );
+
+    Explicacion de JOIN: https://programacionymas.com/blog/como-funciona-inner-left-right-full-join
