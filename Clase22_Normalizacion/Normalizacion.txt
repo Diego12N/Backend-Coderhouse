@@ -1,0 +1,8 @@
+Normalizacion de datos:
+
+    Normalizar es un proceso de estandarizar y validar datos, consiste en eliminar las redundacias o inconsistencias. Con esto liberamos espacio.
+
+
+    Libreria: Normalizr
+
+        npm i normalizr   /// Actualmente no cuenta con mantenimiento.

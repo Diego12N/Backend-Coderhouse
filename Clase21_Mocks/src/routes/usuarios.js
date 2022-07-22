@@ -11,12 +11,20 @@ router.post("/popular", async (req, res) => {
 	res.json(usuarios);
 });
 
+router.get("/", (req, res) => {
+	const todos = api.mostrarTodos();
+	res.json(todos);
+});
+
 router.get("/:id", (req, res) => {
 	const {id} = req.params;
 });
 
-router.post("/", (req, res) => {
-	const {id} = req.params;
+router.post("/", async (req, res) => {
+	let usuarios = await api.ingresar(1);
+	res.json(usuarios);
+
+	res.json(usuarios);
 });
 
 router.post("/:id", (req, res) => {

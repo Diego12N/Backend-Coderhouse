@@ -1,5 +1,5 @@
 import express from "express";
-import usuariosRoutes from "./routes/usuarios";
+import usuariosRoutes from "./routes/usuarios.js";
 const app = express();
 const PORT = 4030;
 
